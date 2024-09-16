@@ -1,7 +1,8 @@
 import User from "../MODELS/user.model.js";
 import bcryptjs from 'bcryptjs';
+import errorMessage from "../UTILS/error.js";
 
-const signup = async (req,res) => {
+const signup = async (req,res,next) => {
     // console.log(req.body);
     const {username,email,password} = req.body;
  
@@ -21,7 +22,8 @@ const signup = async (req,res) => {
         await newUser.save();
         res.json({message:"Signup Successful"});
     } catch (error) {
-        return res.status(400).json({message : error.message});
+        // return res.status(400).json({message : error.message});
+        next(errorMessage(400,'All Fields are Required'));
     }
 }
 
