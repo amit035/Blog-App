@@ -23,7 +23,7 @@ const signup = async (req,res,next) => {
         res.json({message:"Signup Successful"});
     } catch (error) {
         // return res.status(400).json({message : error.message});
-        next(errorMessage(400,'All Fields are Required'));
+        next(errorMessage(400,error.message));
     }
 }
 
