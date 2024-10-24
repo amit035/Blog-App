@@ -1,11 +1,11 @@
 import { Avatar, Button, Dropdown, DropdownDivider, DropdownItem, Navbar, TextInput} from 'flowbite-react'
 import React from 'react'
 import { Link,useLocation } from 'react-router-dom'
-import { FcSearch } from "react-icons/fc";
+import { ImSearch } from "react-icons/im";
 import { LuSunMoon,LuSun } from "react-icons/lu";
 import { useSelector,useDispatch} from 'react-redux';
-import { VscSignOut } from "react-icons/vsc";
-import { CgProfile } from "react-icons/cg";
+import { FaUser } from "react-icons/fa";
+import { HiOutlineLogout } from "react-icons/hi";
 import { toggleTheme } from '../Redux/Theme/themeSlice';
 
 const Header = () => {
@@ -22,12 +22,12 @@ const Header = () => {
         <form>
             <TextInput type='text'
             placeholder='Search...'
-            rightIcon={FcSearch}
+            rightIcon={ImSearch}
             className='hidden lg:inline'
             />
         </form>
         <Button className='w-12 h-10 lg:hidden' color='gray' pill>
-            <FcSearch/>
+            <ImSearch/>
         </Button>
         <div className='flex gap-2 md:order-2'>
             <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={()=> dispatch(toggleTheme())}>
@@ -50,10 +50,10 @@ const Header = () => {
                         <span className='block text-sm font-medium truncate'>{currentUser.email}</span>
                     </Dropdown.Header>
                     <Link to={'/dashboard?tab=profile'}>
-                        <DropdownItem className='font-medium'>Profile <CgProfile className='ml-1'/></DropdownItem>
+                        <DropdownItem className='font-medium'><FaUser className='mr-1'/>Profile</DropdownItem>
                     </Link>
                     <DropdownDivider/>
-                    <DropdownItem className='font-medium'>Sign Out <VscSignOut className='ml-1'/></DropdownItem>
+                    <DropdownItem className='font-medium'><HiOutlineLogout className='mr-1'/>Sign Out</DropdownItem>
                 </Dropdown>
             ) : (
                 <Link to='/signin'>

@@ -20,13 +20,18 @@ const DashSidebar = () => {
         <Sidebar.Items>
             <Sidebar.ItemGroup>
                 <Link to='/dashboard?tab=profile'>
-                <Sidebar.Item active={tab==='profile'} icon={FaUser} label={"user"} labelColor="dark">
+                <Sidebar.Item active={tab==='profile'} 
+                icon={FaUser} 
+                label={"user"} 
+                labelColor="dark"
+                as='div'
+                >
                     Profile
                 </Sidebar.Item>
+                </Link>
                 <Sidebar.Item icon={HiOutlineLogout} className='cursor-pointer'>
                     Sign Out
                 </Sidebar.Item>
-                </Link>
             </Sidebar.ItemGroup>
         </Sidebar.Items>
     </Sidebar>
