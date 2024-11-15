@@ -7,12 +7,31 @@ import { useSelector,useDispatch} from 'react-redux';
 import { FaUser } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import { toggleTheme } from '../Redux/Theme/themeSlice';
+import {signOutSuccess} from '../Redux/User/userSlice';
+import { useEffect } from 'react';
 
 const Header = () => {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const {currentUser} = useSelector(state => state.user);    
   const {theme} = useSelector((state)=> state.theme)
+
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch('/api/user/signout',{
+        method : 'POST',
+      });
+      const data = await res.json();
+        if(!res.ok){
+          console.log(data.message);
+        }else{
+          dispatch(signOutSuccess());
+        } 
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <Navbar className='border-b-2'>    
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
@@ -53,7 +72,7 @@ const Header = () => {
                         <DropdownItem className='font-medium'><FaUser className='mr-1'/>Profile</DropdownItem>
                     </Link>
                     <DropdownDivider/>
-                    <DropdownItem className='font-medium'><HiOutlineLogout className='mr-1'/>Sign Out</DropdownItem>
+                    <DropdownItem onClick={handleSignOut} className='font-medium'><HiOutlineLogout className='mr-1'/>Sign Out</DropdownItem>
                 </Dropdown>
             ) : (
                 <Link to='/signin'>

@@ -29,12 +29,13 @@ export const updateUser = async(req,res,next) => {
         if(!req.body.username.match(/^[a-zA-Z0-9]+$/)){
             return next(errorMessage(400,'username can only contain letters and numbers'));
         }
+    }
         try {
             const updatedUser = await User.findByIdAndUpdate(req.params.userId,{
                 $set:{
                     username:req.body.username,
                     email:req.body.email,
-                    profilePicture:req.body.profilePicture,
+                    photoUrl:req.body.photoUrl,
                     password:req.body.password,
                 },
             },{new : true});
@@ -44,5 +45,24 @@ export const updateUser = async(req,res,next) => {
         } catch (error) {
             next(error);
         }
-    }
 };
+
+export const deleteUser = async (req,res,next) =>{
+    if(req.user.id !== req.params.userId){
+        return next(errorMessage(403,'You are not allowed to delete this user'));
+    }
+    try {
+        await User.findByIdAndDelete(req.params.userId);
+        res.status(200).json('user has been deleted');
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const signout = (req,res,next)=>{
+    try {
+        res.clearCookie('access_token').status(200).json('user has been signed out');
+    } catch (error) {
+        next(error);
+    }
+}
