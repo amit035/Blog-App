@@ -12,9 +12,10 @@ import { updateStart,updateFailure,updateSuccess,
 import { useDispatch } from 'react-redux';
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegThumbsUp , FaRegThumbsDown} from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 export default function DashProfile() {
-  const {currentUser ,error} = useSelector((state) => state.user);
+  const {currentUser ,error , loading} = useSelector((state) => state.user);
   const [imageFile,setImageFile] = useState(null);
   const [imageFileUrl,setImageFileUrl] = useState(null);
   const [imageFileUploadProgress,setImageFileUploadProgress] = useState(null);
@@ -198,9 +199,22 @@ export default function DashProfile() {
         <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} onChange={handleChange}/>
         <TextInput type='email' id='email' placeholder='email' defaultValue={currentUser.email} onChange={handleChange}/>
         <TextInput type='password' id='password' placeholder='password' onChange={handleChange}/>
-        <Button type='submit' gradientDuoTone='purpleToBlue'>
-            <div className='text-lg text-transparent bg-clip-text bg-gradient-to-r from-indigo-950 via-purple-800 to-pink-800'>UPDATE</div>
+        <Button type='submit' gradientDuoTone='pinkToOrange' /*className='text-white bg-gradient-to-br from-green-400'*/ disabled={loading || imageFileUploading}>
+            {loading ?  <div className='text-lg text-transparent bg-clip-text bg-gradient-to-r from-indigo-950 via-purple-800 to-pink-800'>Loading...</div>: 
+            <div className='text-lg text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 via-purple-800 to-pink-800'>UPDATE</div>}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={'/create-post'}>
+              <Button
+                type='button'
+                gradientDuoTone='purpleToPink'
+                className='w-full'
+              >
+                <div className='text-lg text-transparent bg-clip-text 
+                bg-gradient-to-r from-indigo-700 via-purple-800 to-pink-800'>CREATE A POST</div>
+              </Button>
+          </Link>  
+        ) }
       </form>
       <div className='text-red-500 flex justify-between mt-5'>
         <span onClick={()=>setShowModal(true)} className='cursor-pointer'>Delete Account</span>

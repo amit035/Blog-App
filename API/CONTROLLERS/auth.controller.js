@@ -47,7 +47,7 @@ const signin = async (req,res,next) =>{
             return next(errorMessage(400,'Invalid Password'));
         }
 
-        const token = jwt.sign({id : validUser._id} , process.env.JWT_SECRET);
+        const token = jwt.sign({id : validUser._id , isAdmin : validUser.isAdmin} , process.env.JWT_SECRET);
         const {password : pass , ...rest} = validUser._doc;
         res.status(200).cookie('access_token',token,{
             httpOnly:true
@@ -77,11 +77,11 @@ const google = async(req,res,next) =>{
                 username : name.toLowerCase().split(' ').join('') + Math.random().random(9).slice(-4),
                 // username : name.toLowerCase().split(' ').join(''),
                 email,
-                password : generatedPassword,
+                password : hashedPassword,
                 profilePicture : googlePhotoUrl,
             });
             await newUser.save();
-            const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET);
+            const token = jwt.sign({id:newUser._id, isAdmin : newUser.isAdmin},process.env.JWT_SECRET);
             const {password,...rest} = newUser._doc;
             res.status(200).cookie('access_token',token,{
                 httpOnly : true

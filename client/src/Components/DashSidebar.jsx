@@ -39,7 +39,7 @@ const DashSidebar = () => {
         <Sidebar.Items>
             <Sidebar.ItemGroup>
                 <Link to='/dashboard?tab=profile'>
-                <Sidebar.Item active={tab==='profile'} 
+                <Sidebar.Item active={tab==='profile'}
                 icon={FaUser} 
                 label={"user"} 
                 labelColor="dark"

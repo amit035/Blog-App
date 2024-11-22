@@ -69,10 +69,10 @@ const Header = () => {
                         <span className='block text-sm font-medium truncate'>{currentUser.email}</span>
                     </Dropdown.Header>
                     <Link to={'/dashboard?tab=profile'}>
-                        <DropdownItem className='font-medium'><FaUser className='mr-1'/>Profile</DropdownItem>
+                        <DropdownItem className='font-medium'><FaUser className='mr-2 h-5 w-5 text-xl'/>Profile</DropdownItem>
                     </Link>
                     <DropdownDivider/>
-                    <DropdownItem onClick={handleSignOut} className='font-medium'><HiOutlineLogout className='mr-1'/>Sign Out</DropdownItem>
+                    <DropdownItem onClick={handleSignOut} className='font-medium'><HiOutlineLogout className='mr-2 h-5 w-5 text-xl'/>Sign Out</DropdownItem>
                 </Dropdown>
             ) : (
                 <Link to='/signin'>
