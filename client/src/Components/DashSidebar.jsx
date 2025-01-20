@@ -7,6 +7,7 @@ import { signOutSuccess } from '../Redux/User/userSlice';
 import { useDispatch } from 'react-redux';
 import { CgFileDocument } from "react-icons/cg";
 import { useSelector } from 'react-redux';
+import { IoCreateOutline } from "react-icons/io5";
 
 const DashSidebar = () => {
   const location = useLocation();
@@ -40,7 +41,7 @@ const DashSidebar = () => {
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.Items>
-            <Sidebar.ItemGroup className='flex flex-col gap-0 dark:bg-slate-600 rounded-xl'>
+            <Sidebar.ItemGroup className='flex flex-col gap-0 dark:bg-slate-600 rounded-xl DashSide-Font'>
                 <Link to='/dashboard?tab=profile'>
                 <Sidebar.Item active={tab==='profile'}
                 icon={FaUser} 
@@ -70,6 +71,16 @@ const DashSidebar = () => {
                       Sign Out
                     </div>
                 </Sidebar.Item>
+
+                {tab==='posts' && 
+                <Link to={'/create-post'}>
+                  <Sidebar.Item icon={IoCreateOutline}>
+                    <div className='text-lg font-medium'>
+                      Create Post
+                    </div>
+                  </Sidebar.Item>
+                </Link>
+                }
             </Sidebar.ItemGroup>
         </Sidebar.Items>
     </Sidebar>

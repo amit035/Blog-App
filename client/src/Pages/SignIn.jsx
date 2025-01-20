@@ -52,11 +52,12 @@ const SignIn = () => {
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
         {/*Left Part*/}
         <div className="flex-1">
-        <Link to="/" className='font-bold dark:text-white text-4xl'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg
-            text-white'> <i>Memories</i> & <i>Stories</i></span>
+        <Link to="/" className='dark:text-white'>
+            <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+            satisfy-regular-xs font-bold py-5 text-center'> Memories & Stories</h1>
         </Link>
-        <div className='text-xl font-medium italic mt-6 text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400'>
+        <div className='text-xl font-medium italic mt-1 text-transparent bg-clip-text 
+        bg-gradient-to-r to-emerald-600 from-sky-400 underline decoration-sky-500'>
           A Platform to share your memories & Explain your Stories
         </div>
         </div>

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import {useSelector} from 'react-redux'
-import {Button, Table} from 'flowbite-react'
+import {Button, Modal, ModalBody, ModalHeader, Table} from 'flowbite-react'
 import {Link} from 'react-router-dom'
+import { MdDeleteForever } from "react-icons/md";
+import { FaRegThumbsUp , FaRegThumbsDown} from "react-icons/fa6";
+
 
 export default function dashboardPosts () {
     const {currentUser} = useSelector((state) => state.user);
     const [userPost , setUserPost] = useState([]);
     const [showMore,setShowMore] = useState(true);
+    const [showModal , setShowModal] = useState(false);
+    const [postIdDelete , setPostIdDelete] = useState('');
     console.log(userPost);
     useEffect(() => {
         const fetchPosts = async () => {
@@ -44,13 +49,32 @@ export default function dashboardPosts () {
         }
     }
 
+    const handleDeletePost = async () => {
+        setShowModal(false);
+        try {
+            const res = await fetch(`/api/post/delete-post/${postIdDelete}/${currentUser._id}`,
+                {
+                    method : 'DELETE' , 
+                }
+            );
+            const data = await res.json();
+            if(!res.ok){
+                console.log(data.message);
+            }else{
+                setUserPost((prev) => prev.filter((post) => post._id != postIdDelete));
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <div className="table-auto overflow-x-scroll md:mx-auto p-1 scrollbar scrollbar-track-slate-500
         scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
         dark:scrollbar-thumb-slate-500">
             {currentUser.isAdmin && userPost.length > 0 ? (
                 <>
-                    <Table hoverable className="shadow-md">
+                    <Table className="shadow-md">
                         <Table.Head className="">
                             <Table.HeadCell> Date Updated</Table.HeadCell>
                             <Table.HeadCell> Post Image</Table.HeadCell>
@@ -81,7 +105,12 @@ export default function dashboardPosts () {
                                         {post.category}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <span className="font-medium text-red-500 hover:underline cursor-pointer">
+                                        <span onClick={()=>{
+                                            setShowModal(true);
+                                            setPostIdDelete(post._id);
+                                        }}
+                                        
+                                        className="font-medium text-red-500 hover:underline cursor-pointer">
                                             Delete
                                         </span>
                                     </Table.Cell>
@@ -99,8 +128,9 @@ export default function dashboardPosts () {
                     {
                         showMore && (
                             <button onClick={handleShowMore} className="w-full self-center py-2 rounded-lg
-                            text-transparent bg-gradient-to-r from-blue-950 via-purple-900 to-green-900">
-                                 <span className="text-white">
+                             bg-gradient-to-r from-yellow-100 via-orange-400 to-red-600
+                             dark:bg-gradient-to-r dark:from-blue-950 dark:via-purple-900 dark:to-green-900">
+                                 <span className="dark:text-white Google-Font">
                                     SHOW MORE
                                  </span>
                             </button>
@@ -108,8 +138,24 @@ export default function dashboardPosts () {
                     }
                 </>
             ) : (
-                <p></p>
+                <p>You have no Pots's Yet</p>
             )}
+
+            <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
+                <ModalHeader>
+                    <ModalBody>
+                        <div className='text-center'>
+                          <MdDeleteForever className='h-14 w-14 text-red-700 mx-auto'/>
+                          <h3 className='mb-5 text-lg text-red-500'>Are you sure to you want to delete this Post</h3>
+                          <div className='flex justify-center gap-4'>
+                            <Button color='failure' onClick={handleDeletePost}><FaRegThumbsUp className='mr-2 mt-2 h-5 w-5'/>Yes, I'm Sure</Button>
+                            <Button color='blue' onClick={()=>setShowModal(false)}><FaRegThumbsDown className='mr-2 mt-2 h-5 w-5'/>No, Cancel</Button>
+                          </div>
+                        </div>
+                    </ModalBody>
+                </ModalHeader>
+            </Modal>
+
         </div>
     )
 }

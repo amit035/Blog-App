@@ -11,6 +11,7 @@ import FooterComp from './Components/Footer'
 import PrivateRoute from './Components/PrivateRoute'
 import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute'
 import CreatePost from './Pages/CreatePost'
+import Privacy from './Pages/Privacy'
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route element={<OnlyAdminPrivateRoute/>}>
             <Route path='/create-post' element={<CreatePost/>}></Route>
         </Route>
+        <Route path='/privacy' element={<Privacy/>}></Route>
       </Routes>
       <FooterComp/>
     </BrowserRouter>

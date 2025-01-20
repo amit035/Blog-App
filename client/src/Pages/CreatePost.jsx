@@ -98,12 +98,6 @@ export default function CreatePost (){
               <option value="javascript">Javascript</option>
               <option value="reactJS">ReactJS</option>  
             </Select>
-            {/* <select className='rounded-lg bg-gray-700 outline-none'>
-              <option value="someOption">Select a Category</option>
-              <option value="Javascript"><FaJsSquare/>Javascript</option>
-              <option value="reactJs">ReactJs</option>
-              <option value="mongoDB">MongoDB</option>
-            </select> */}
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted
         p-3">

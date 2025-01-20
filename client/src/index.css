@@ -3,9 +3,70 @@
 @tailwind utilities;
 
 body {
-    height: 100vh;
+    height: 90vh;
+    font-family: "Audiowide", serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 100%;
+}
+
+html {
+    height: 100%;
 }
 
 .ql-editor {
     font-size: 1.05rem;
 }
+
+.Google-Font {
+        font-family: "Warnes", serif;
+        font-weight: 400;
+        font-style: normal;
+}
+
+.DashSide-Font {
+    font-family: "Montserrat Underline", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+.satisfy-regular {
+    font-family: "Satisfy", serif;
+    font-weight: 410;
+    font-style: normal;
+    font-size: 27px;
+  }
+
+  .satisfy-regular-sm {
+    font-family: "Satisfy", serif;
+    font-weight: 410;
+    font-style: normal;
+    font-size: 20px;
+  }
+
+  .satisfy-regular-xs {
+    font-family: "Satisfy", serif;
+    font-weight: 410;
+    font-style: normal;
+    font-size: 49px;
+  }  
+
+  .transparent-box {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow:0 0 10px cyan, 0 0 20px rgb(147, 188, 229), 0 0 30px rgb(16,23,30);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 25%;
+    margin-left: 25%;
+
+  }
+  
+  
+  
+  
