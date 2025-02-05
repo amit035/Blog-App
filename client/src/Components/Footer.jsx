@@ -4,6 +4,8 @@ import { FaFacebook } from "react-icons/fa6";
 
 const FooterComp = () =>{
 
+    const Logo = "Logo.png";
+
     return <Footer container className="border border-t-8 border-b-8 border-teal-500">
         <div className="w-full max-w-7xl mx-auto">
             <div className="grid w-full justify-between sm:flex md:grid-cols-1">
@@ -11,7 +13,7 @@ const FooterComp = () =>{
                 <div className="mt-5">
                     <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-lg font-semibold dark:text-white'>
                     <div className='px-1 py-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 
-                    to-pink-500 satisfy-regular font-bold'>Memories & Stories</div>
+                    to-pink-500 satisfy-regular text-xl'>Memories & Stories</div>
                     </Link>
                 </div>
                 {/* Misc */}
@@ -85,8 +87,10 @@ const FooterComp = () =>{
             {/*Copyright*/}
             <div className="w-full sm:flex sm:items-center sm:justify-between">
                 <Footer.Copyright href='#' by='Amit Behera' year={new Date().getFullYear()}/>
-                <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
-                    <Footer.Icon href="#" icon={FaFacebook}/>
+                <div className="flex gap-4 sm:mt-0 mt-4 sm:justify-center">
+                    <Footer href="#">
+                        <img src="Logo.png" alt="M&S" height='45' width='45' className="flex-shrink -mr-2"/>
+                    </Footer>
                     <Footer.Icon href="#" icon={FaFacebook}/>
                     <Footer.Icon href="#" icon={FaFacebook}/>
                 </div>

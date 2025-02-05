@@ -74,11 +74,11 @@ export default function dashboardPosts () {
         dark:scrollbar-thumb-slate-500">
             {currentUser.isAdmin && userPost.length > 0 ? (
                 <>
-                    <Table className="shadow-md">
+                    <Table className="">
                         <Table.Head className="">
                             <Table.HeadCell> Date Updated</Table.HeadCell>
-                            <Table.HeadCell> Post Image</Table.HeadCell>
-                            <Table.HeadCell> Post Title</Table.HeadCell>
+                            <Table.HeadCell> Image</Table.HeadCell>
+                            <Table.HeadCell> Title</Table.HeadCell>
                             <Table.HeadCell> Category</Table.HeadCell>
                             <Table.HeadCell> Delete</Table.HeadCell>
                             <Table.HeadCell>
@@ -86,20 +86,20 @@ export default function dashboardPosts () {
                             </Table.HeadCell>
                         </Table.Head>
                         {userPost.map((post) => (
-                            <Table.Body className="divide-y">
+                            <Table.Body className="divide-y" key={post._id}>
                                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <Table.Cell>{new Date(post.updatedAt).toLocaleDateString()}</Table.Cell>
                                     <Table.Cell>
-                                        <Link to={`/post/${post.slug}`}>
+                                        <Link to={`/post/${encodeURIComponent(post.title)}`}>
                                             <img 
                                             src={post.image} 
                                             alt={post.title} 
-                                            className='w-20 h-10 object-cover bg-gray-200'
+                                            className='w-20 h-10 object-cover'
                                             />
                                         </Link>
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${post.slug}`}>{post.title}</Link>
+                                        <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${encodeURIComponent(post.title)}`}>{post.title}</Link>
                                     </Table.Cell>
                                     <Table.Cell>
                                         {post.category}
@@ -115,7 +115,7 @@ export default function dashboardPosts () {
                                         </span>
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Link className='text-teal-600 hover:underline' to={`/update-post/${post._id}`}>
+                                        <Link className='text-teal-600 hover:underline' to={`/edit-post/${post._id}`}>
                                             <span className="font-medium">
                                                 Edit
                                             </span>
@@ -128,9 +128,9 @@ export default function dashboardPosts () {
                     {
                         showMore && (
                             <button onClick={handleShowMore} className="w-full self-center py-2 rounded-lg
-                             bg-gradient-to-r from-yellow-100 via-orange-400 to-red-600
-                             dark:bg-gradient-to-r dark:from-blue-950 dark:via-purple-900 dark:to-green-900">
-                                 <span className="dark:text-white Google-Font">
+                             bg-gradient-to-r from-white via-slate-500 to-white
+                             dark:bg-gradient-to-r dark:from-transparent dark:via-slate-800 dark:to-transparent">
+                                 <span className="font-bold text-white">
                                     SHOW MORE
                                  </span>
                             </button>

@@ -55,7 +55,7 @@ html {
     position: absolute;
     width: 50%;
     height: 50%;
-    background-color: rgba(0, 0, 0, 0.2);
+    /* background-color: rgba(0, 0, 0, 0.2); */
     box-shadow:0 0 10px cyan, 0 0 20px rgb(147, 188, 229), 0 0 30px rgb(16,23,30);
     color: white;
     display: flex;
@@ -66,6 +66,14 @@ html {
     margin-left: 25%;
 
   }
+
+  .yatra-one-regular {
+    font-family: "Yatra One", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  
   
   
   

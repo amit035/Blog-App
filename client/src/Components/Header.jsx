@@ -36,7 +36,7 @@ const Header = () => {
     <Navbar className='border-b-2'>    
         <Link to="/" className='self-center text-lg sm:text-xl font-semibold dark:text-white'>
             <div className='px-1 py-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 
-            to-pink-500 satisfy-regular font-bold'>Memories & Stories</div>
+            to-pink-500 satisfy-regular text-xl'>Memories & Stories</div>
         </Link>
         <form>
             <TextInput type='text'

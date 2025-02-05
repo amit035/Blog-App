@@ -41,7 +41,7 @@ const DashSidebar = () => {
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.Items>
-            <Sidebar.ItemGroup className='flex flex-col gap-0 dark:bg-slate-600 rounded-xl DashSide-Font'>
+            <Sidebar.ItemGroup className='flex flex-col gap-0 dark:bg-slate-600 rounded-xl'>
                 <Link to='/dashboard?tab=profile'>
                 <Sidebar.Item active={tab==='profile'}
                 icon={FaUser} 
@@ -71,7 +71,7 @@ const DashSidebar = () => {
                       Sign Out
                     </div>
                 </Sidebar.Item>
-
+                {/* <>
                 {tab==='posts' && 
                 <Link to={'/create-post'}>
                   <Sidebar.Item icon={IoCreateOutline}>
@@ -81,6 +81,7 @@ const DashSidebar = () => {
                   </Sidebar.Item>
                 </Link>
                 }
+                </> */}
             </Sidebar.ItemGroup>
         </Sidebar.Items>
     </Sidebar>

@@ -44,10 +44,10 @@ export const getPost = async (req, res , next) => {
             ...(req.query.slug && {
                 slug : req.query.slug
             }),
-            // search post id
-            // ...(req.query.postId && {
-            //     _id : req.query.postId
-            // }),
+            //search post id
+            ...(req.query._id && {
+                _id : req.query._id
+            }),
             // search anything on the search bar
             ...(req.query.searchTerm && {
                 $or : [
@@ -89,8 +89,28 @@ export const deletePost = async (req,res,next) => {
     }
 
     try {
-        await Post.findByIdAndDelete(req.params.postID);
+        await Post.findByIdAndDelete(req.params._id);
         res.status(200).json('The Post has been deleted');
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const editPost = async ( req , res , next) => {
+    if(!req.user.isAdmin){
+        return next(errorMessage(403 , 'You are not allowed to edit this post'));
+    }
+
+    try {
+        const editedPost = await Post.findByIdAndUpdate(
+            req.params.id,{
+                $set: {
+                    title: req.body.title,
+                    content: req.body.content,
+                    category: req.body.category,
+                    image: req.body.image,
+                }}, {new:true})
+                res.status(200).json(editedPost);
     } catch (error) {
         next(error);
     }

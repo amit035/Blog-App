@@ -17,7 +17,7 @@ const postSchema =  new mongoose.Schema(
         },
         image: {
             type: String,
-            default: 'https://media.sproutsocial.com/uploads/2019/09/how-to-write-a-blog-post.svg'
+            default: 'Logo.png'
         },
         category: {
             type : String,
