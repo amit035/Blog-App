@@ -12,7 +12,7 @@ export default function dashboardPosts () {
     const [showMore,setShowMore] = useState(true);
     const [showModal , setShowModal] = useState(false);
     const [postIdDelete , setPostIdDelete] = useState('');
-    console.log(userPost);
+    // console.log(userPost);
     useEffect(() => {
         const fetchPosts = async () => {
             try {

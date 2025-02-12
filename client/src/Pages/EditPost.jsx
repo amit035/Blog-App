@@ -19,8 +19,11 @@ export default function EditPost (){
   const navigate = useNavigate();
   const {currentUser} = useSelector((state) => state.user);
   const id = window.location.pathname.split("/").pop();
-  // console.log(id);
-  
+
+  const resetValue = () =>{
+    navigate('/dashboard?tab=posts');
+  }
+
   const handleUploadImage = async () => {
     try {
       if(!files){
@@ -162,13 +165,16 @@ export default function EditPost (){
             />
           )
         }
-        <ReactQuill theme="snow" value={formData.content} placeholder="Write something..." className='h-72 mb-12' required
+        <ReactQuill theme="snow" value={formData.content} placeholder="Write something..." id='ContentData' className='h-72 mb-12' required
           onChange={(value) => {
             setFormData({...formData , content : value});
           }}
         />
         <Button type="submit" gradientDuoTone='purpleToPink'>
           SAVE
+        </Button>
+        <Button gradientDuoTone='pinkToOrange' onClick={resetValue}>
+          CANCEL
         </Button>
         {publishError && <Alert className='mt-5' color='failure'>{publishError}</Alert>}
       </form>
