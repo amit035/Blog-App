@@ -15,6 +15,7 @@ const DashSidebar = () => {
   const dispatch = useDispatch();
   const {currentUser} = useSelector(state => state.user);
   const [userscount,setUsersCount] = useState([]);
+  const [userPost , setUserPost] = useState([]);
   const [tab,setTab] = useState('')
   useEffect(()=>{
     const urlParams = new URLSearchParams(location.search)
@@ -57,6 +58,23 @@ const DashSidebar = () => {
     }
 },[currentUser._id]);
 
+useEffect(() => {
+  const fetchPosts = async () => {
+      try {
+          const res = await fetch(`/api/post/get-post?userId=${currentUser._id}`)
+          const data = await res.json()
+          if(res.ok){
+              setUserPost(data.posts.length);
+          }
+      } catch (error) {
+          console.log(error.message);
+      }
+  };
+  if(currentUser.isAdmin){
+      fetchPosts();
+  }
+},[currentUser._id])
+
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.Items>
@@ -79,7 +97,9 @@ const DashSidebar = () => {
                     <Sidebar.Item
                       active = {tab === 'posts'}
                       icon = {CgFileDocument}
-                      as = 'div'  
+                      as = 'div' 
+                      label = {userPost} 
+                      labelColor = 'green'
                     >
                       <div className='text-lg font-medium'>Posts</div>
                     </Sidebar.Item>
@@ -93,6 +113,7 @@ const DashSidebar = () => {
                       icon = {FaUsers}
                       as = 'div'
                       label = {userscount}
+                      labelColor = 'green'
                     >
                       <div className='text-lg font-medium'>Users</div>
                     </Sidebar.Item>

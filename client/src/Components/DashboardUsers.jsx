@@ -50,8 +50,21 @@ export default function () {
         }
     }
 
-    const handleDeleteUser =()=>{
-
+    const handleDeleteUser =async()=>{
+        try {
+            const res = await fetch(`/api/user/delete/${userIdDelete}`,{
+                method:'DELETE',
+            });
+            const data = await res.json();
+            if(res.ok){
+                setUsers((prev)=>prev.filter((user)=>user._id!==userIdDelete));
+                setShowModal(false);
+            }else{
+                console.log(data.message);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     return (
@@ -81,7 +94,7 @@ export default function () {
                                             />
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${encodeURIComponent(user.username)}`}>{user.username}</Link>
+                                        <Link className='font-medium text-gray-900 dark:text-white' to={`/user/${encodeURIComponent(user.username)}`}>{user.username}</Link>
                                     </Table.Cell>
                                     <Table.Cell>
                                         {user.email}

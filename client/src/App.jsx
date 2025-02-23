@@ -13,6 +13,7 @@ import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute'
 import CreatePost from './Pages/CreatePost'
 import Privacy from './Pages/Privacy'
 import EditPost from './Pages/EditPost'
+import PostPage from './Pages/PostPage'
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path='/edit-post/:id' element={<EditPost/>}></Route>
         </Route>
         <Route path='/privacy' element={<Privacy/>}></Route>
+        <Route path='/post/:postData' element={<PostPage/>}></Route>
       </Routes>
       <FooterComp/>
     </BrowserRouter>

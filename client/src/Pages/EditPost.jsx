@@ -20,11 +20,12 @@ export default function EditPost (){
   const {currentUser} = useSelector((state) => state.user);
   const id = window.location.pathname.split("/").pop();
 
-  const resetValue = () =>{
+  const resetValue = async() =>{
     navigate('/dashboard?tab=posts');
   }
 
-  const handleUploadImage = async () => {
+  const handleUploadImage = async (e) => {
+    e.preventDefault();
     try {
       if(!files){
         setImageUploadError('Please upload an Image');
@@ -82,8 +83,7 @@ export default function EditPost (){
       }
       if(res.ok){
         setPublishError(null);
-        // navigate(`/post/${data.slug}`);
-        navigate(`/post/${formData.title}`);
+        navigate(`/post/${data.slug}`);
         console.log(data.message);
       }
     } catch (error) {

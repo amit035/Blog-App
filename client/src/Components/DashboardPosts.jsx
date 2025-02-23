@@ -90,7 +90,7 @@ export default function dashboardPosts () {
                                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <Table.Cell>{new Date(post.updatedAt).toLocaleDateString()}</Table.Cell>
                                     <Table.Cell>
-                                        <Link to={`/post/${encodeURIComponent(post.title)}`}>
+                                        <Link to={`/post/${(post.slug)}`}>
                                             <img 
                                             src={post.image} 
                                             alt={post.title} 
@@ -99,7 +99,7 @@ export default function dashboardPosts () {
                                         </Link>
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${encodeURIComponent(post.title)}`}>{post.title}</Link>
+                                        <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${decodeURIComponent(post.slug)}`}>{post.title}</Link>
                                     </Table.Cell>
                                     <Table.Cell>
                                         {post.category}
