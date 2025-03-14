@@ -2,6 +2,34 @@ import { Button } from "flowbite-react"
 import { FaGithub } from "react-icons/fa";
 
 function Advertisement() {
+
+  const images = [
+    "../AD1.jpg",
+    "../AD2.jpg"
+];
+
+let currentIndex = 0;
+
+window.onload = function () {
+  const imgElement = document.getElementById("slider-image");
+  // console.log("Element is now available:", imgElement);
+
+  function changeImage() {
+    currentIndex = (currentIndex + 1) % images.length; // Loop back to first image
+    imgElement.style.opacity = "0"; // Fade-out effect
+    setTimeout(() => {
+        imgElement.src = images[currentIndex];
+        imgElement.style.opacity = "1"; // Fade-in effect
+    }, 500);
+}
+
+// Change image every 5 seconds
+setInterval(changeImage, 5000);
+
+};
+
+// Function to change image
+
   return (
     <div className='flex flex-col sm:flex-row p-3 border border-teal-500 justify-center items-center 
       text-center rounded-xl'>
@@ -19,7 +47,7 @@ function Advertisement() {
         </Button>
       </div>
       <div className='p-7 flex-1'>
-        <img src="../AD1.jpg" alt="AD1" />
+        <img src="../AD1.jpg" alt="Advertisement" id='slider-image'/>
       </div>
     </div>
   )

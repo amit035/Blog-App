@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import {Button} from 'flowbite-react'
 import Advertisement from "../Components/Advertisement.jsx";
+import Comments from "../Components/Comments.jsx";
+import { FaAngleDoubleUp } from "react-icons/fa";
 
 function PostPage () {
   const pageData = window.location.pathname.split("/").pop();
@@ -39,6 +41,10 @@ function PostPage () {
     </div>
   );
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
         <h1 className="text-3xl mt-10 p-3 text-center max-w-2xl mx-auto lg:text-4xl">{post && post.title}</h1>
@@ -60,6 +66,8 @@ function PostPage () {
         <div className="max-w-4xl mx-auto w-full">
           <Advertisement/>
         </div>
+        <Comments postId={post._id}/>
+        <FaAngleDoubleUp onClick={scrollToTop} className='hover:animate-bounce mx-auto items-center' size='25px'/>
     </main>
   )
 }

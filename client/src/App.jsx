@@ -14,10 +14,12 @@ import CreatePost from './Pages/CreatePost'
 import Privacy from './Pages/Privacy'
 import EditPost from './Pages/EditPost'
 import PostPage from './Pages/PostPage'
+import MoveTop from './Components/MoveTop'
 
 const App = () => {
   return (
     <BrowserRouter>
+      <MoveTop/>
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>}></Route>

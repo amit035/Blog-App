@@ -65,6 +65,7 @@ useEffect(() => {
           const data = await res.json()
           if(res.ok){
               setUserPost(data.posts.length);
+              // console.log(data.posts.length);
           }
       } catch (error) {
           console.log(error.message);
