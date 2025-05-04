@@ -9,6 +9,7 @@ import { CgFileDocument } from "react-icons/cg";
 import { useSelector } from 'react-redux';
 import { IoCreateOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
+import { LiaCommentSolid } from "react-icons/lia";
 
 const DashSidebar = () => {
   const location = useLocation();
@@ -120,14 +121,26 @@ useEffect(() => {
                     </Sidebar.Item>
                   </Link> 
                 )}
-                {/* <Sidebar.Item icon={IoCreateOutline}> */}
+                <>
+                <Sidebar.Item icon={IoCreateOutline}>
                 <Link to='/create-post'>
-                  <div className='text-lg font-medium flex p-1 rounded-lg mt-2'>
-                    <IoCreateOutline size='25px' className='ml-1 mr-2'/>
+                  <div className='text-lg font-medium'>
+                    {/* <IoCreateOutline size='25px' className='ml-1 mr-2'/> */}
                     Create Post
                   </div>
-                </Link>  
-                {/* </Sidebar.Item> */}
+                </Link>
+                </Sidebar.Item>
+                </>
+                {/* comments */}
+                <>
+                <Sidebar.Item icon={LiaCommentSolid}>
+                <Link to='/dashboard?tab=comments'>
+                  <div className='text-lg font-medium'>
+                    Comments
+                  </div>
+                </Link>
+                </Sidebar.Item>
+                </>  
                 <Sidebar.Item icon={HiOutlineLogout} className='cursor-pointer' onClick={handleSignOut} >
                     <div className='text-lg font-medium'>
                       Sign Out

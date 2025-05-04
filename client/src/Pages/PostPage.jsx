@@ -4,6 +4,7 @@ import {Button} from 'flowbite-react'
 import Advertisement from "../Components/Advertisement.jsx";
 import Comments from "../Components/Comments.jsx";
 import { FaAngleDoubleUp } from "react-icons/fa";
+import PostCard from "../Components/PostCard.jsx";
 
 function PostPage () {
   const pageData = window.location.pathname.split("/").pop();
@@ -11,6 +12,7 @@ function PostPage () {
   const [loading,setLoading] = useState(true);
   const [error,setError] = useState(false);
   const [post,setPost] = useState(null);
+  const [recentPosts,setRecentPosts] = useState(null);
   useEffect(()=>{
     const fetchPageData = async () => {
         try {
@@ -34,6 +36,22 @@ function PostPage () {
     }
     fetchPageData();
   },[pageData]);
+
+  useEffect(()=>{
+    try {
+      const fetchRecentPosts = async () => {
+        const res = await fetch(`/api/post/get-post?limit=3`);
+        const data = await res.json();
+        const getRecentPosts = data.posts.slice(0,3);
+        if(res.ok){
+          setRecentPosts(getRecentPosts);
+        }
+      };
+      fetchRecentPosts();
+    } catch (error) {
+      console.log(error.message);
+    }
+  },[])
 
   if(loading) return (
     <div className="flex justify-center items-center min-h-screen">
@@ -67,9 +85,20 @@ function PostPage () {
           <Advertisement/>
         </div>
         <Comments postId={post._id}/>
-        <FaAngleDoubleUp onClick={scrollToTop} className='hover:animate-bounce mx-auto items-center' size='25px'/>
+        <div className="flex flex-col justify-center items-center mb-5">
+            <h1 className="text-xl mt-5">Recent Article</h1>
+            <div className="flex flex-col gap-5 mt-5 justify-center">
+              {
+                recentPosts && 
+                  recentPosts.map((post) =>
+                    <PostCard key={post._id} post={post}/>
+                  )
+              }
+            </div>
+        </div>
+        <FaAngleDoubleUp onClick={scrollToTop} className='mx-auto items-center cursor-pointer' size='25px'/>
     </main>
-  )
+  );
 }
 
 export default PostPage
