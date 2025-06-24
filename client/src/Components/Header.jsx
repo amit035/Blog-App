@@ -1,6 +1,6 @@
 import { Avatar, Button, Dropdown, DropdownDivider, DropdownItem, Navbar, TextInput} from 'flowbite-react'
-import React from 'react'
-import { Link,useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link,useLocation , useNavigate} from 'react-router-dom'
 import { ImSearch } from "react-icons/im";
 import { IoMoonSharp } from "react-icons/io5";
 import { useSelector,useDispatch} from 'react-redux';
@@ -12,9 +12,20 @@ import { FaSun } from "react-icons/fa";
 
 const Header = () => {
   const path = useLocation().pathname;
+  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {currentUser} = useSelector(state => state.user);    
   const {theme} = useSelector((state)=> state.theme);
+  const [searchKeyWord , setSearchKeyWord] = useState('');
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchKeyWordFromURL = urlParams.get('search');
+    if(searchKeyWordFromURL){
+        setSearchKeyWord(searchKeyWordFromURL);
+    }
+  },[location.search]);
 
   const handleSignOut = async () => {
     try {
@@ -32,17 +43,27 @@ const Header = () => {
     }
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('search',searchKeyWord);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  }
+
   return (
     <Navbar className='border-b-2'>    
         <Link to="/" className='self-center text-lg sm:text-xl font-semibold dark:text-white'>
             <div className='px-1 py-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 
             to-pink-500 satisfy-regular text-xl'>Memories & Stories</div>
         </Link>
-        <form>
+        <form onSubmit={handleSubmit}>
             <TextInput type='text'
             placeholder='Search...'
             rightIcon={ImSearch}
             className='hidden lg:inline'
+            value={searchKeyWord}
+            onChange={(e) => setSearchKeyWord(e.target.value)}
             />
         </form>
         <Button className='w-12 h-10 lg:hidden' color='gray' pill>

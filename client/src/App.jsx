@@ -15,6 +15,7 @@ import Privacy from './Pages/Privacy'
 import EditPost from './Pages/EditPost'
 import PostPage from './Pages/PostPage'
 import MoveTop from './Components/MoveTop'
+import Search from './Pages/Search'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/projects' element={<Projects/>}></Route>
         <Route path='/signin' element={<SignIn/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
+        <Route path='/search' element={<Search/>}></Route>
         <Route element={<PrivateRoute/>}>
             <Route path='/dashboard' element={<Dashboard/>}></Route>
         </Route>

@@ -1,4 +1,4 @@
-import {Sidebar} from 'flowbite-react'
+import {Sidebar, SidebarItem} from 'flowbite-react'
 import { FaUser } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { IoCreateOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { LiaCommentSolid } from "react-icons/lia";
+import { AiFillHdd } from "react-icons/ai";
 
 const DashSidebar = () => {
   const location = useLocation();
@@ -81,6 +82,19 @@ useEffect(() => {
     <Sidebar className='w-full md:w-56'>
         <Sidebar.Items>
             <Sidebar.ItemGroup className='flex flex-col gap-0 dark:bg-slate-600 rounded-xl'>
+                {/* Admin Dashboard */}
+                {
+                  currentUser && currentUser.isAdmin && (
+                    <Link to='/dashboard?tab=admin-dashboard'>
+                      <SidebarItem
+                        active={tab=='admin-dashboard' || !tab}
+                        icon={AiFillHdd}
+                      >
+                        Dashboard
+                      </SidebarItem>
+                    </Link>
+                  )
+                }
                 <Link to='/dashboard?tab=profile'>
                 <Sidebar.Item active={tab==='profile'}
                 icon={FaUser} 
@@ -146,17 +160,6 @@ useEffect(() => {
                       Sign Out
                     </div>
                 </Sidebar.Item>
-                {/* <>
-                {tab==='posts' && 
-                <Link to={'/create-post'}>
-                  <Sidebar.Item icon={IoCreateOutline}>
-                    <div className='text-lg font-medium'>
-                      Create Post
-                    </div>
-                  </Sidebar.Item>
-                </Link>
-                }
-                </> */}
             </Sidebar.ItemGroup>
         </Sidebar.Items>
     </Sidebar>
