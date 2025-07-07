@@ -5,7 +5,7 @@ import DashProfile from "../Components/DashProfile"
 import DashboardPosts from "../Components/DashboardPosts"
 import DashboardUsers from "../Components/DashboardUsers"
 import AdminDashboard from "../Components/AdminDashboard"
-import DashComments from "../Components/Dashcomments"
+import DashComments from "../Components/DashComments"
 
 
 const Dashboard = () => {
