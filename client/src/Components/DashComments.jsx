@@ -4,8 +4,6 @@ import {Button, Modal, ModalBody, ModalHeader, Table} from 'flowbite-react'
 import {Link} from 'react-router-dom'
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegThumbsUp , FaRegThumbsDown} from "react-icons/fa6";
-import { BsPersonFillCheck } from "react-icons/bs";
-import { BsPersonFillX } from "react-icons/bs";
 
 export default function DashComments() {
     const {currentUser} = useSelector((state) => state.user);

@@ -4,9 +4,8 @@ import DashSidebar from "../Components/DashSidebar"
 import DashProfile from "../Components/DashProfile"
 import DashboardPosts from "../Components/DashboardPosts"
 import DashboardUsers from "../Components/DashboardUsers"
-import DashComments from "../Components/Dashcomments"
 import AdminDashboard from "../Components/AdminDashboard"
-
+import DashComments from "../Components/Dashcomments"
 
 
 const Dashboard = () => {
